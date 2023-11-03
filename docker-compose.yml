@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+  web:
+    container_name: $HOST_NAME
+    user: root
+    build:
+      context: .docker/php
+      dockerfile: Dockerfile
+    expose:
+      - 8000
+    volumes:
+      - ./web:/var/www
+      #- vendor:/var/www/vendor
+    env_file:
+      - ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - database
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.symfony.rule=Host(`symfony.app.localhost`)"
+      - "traefik.http.routers.symfony.tls=true"
+    tty: true
+
+  database:
+    image: mysql:8.1
+    container_name: $DATABASE_HOST
+    restart: unless-stopped
+    ports:
+      - $DATABASE_PORT
+    expose:
+      - $DATABASE_PORT
+    volumes:
+      - database:/var/lib/mysql
+      - ./certs:/etc/mysql/certs
+      #- ./.docker/data:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=$DATABASE_NAME
+    networks:
+      - traefik_net
+
+volumes:
+  database:
+    driver: local
+  vendor:
+    driver: local
+
+networks:
+  traefik_net:
+    external: true

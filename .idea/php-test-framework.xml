@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpTestFrameworkSettings">
+    <test_tools>
+      <tool tool_name="Codeception">
+        <settings>
+          <configurations>
+            <configuration_by_sdk interpreter_id="55fddd85-c31f-4d59-abf1-e3d712f2378c" executable_path="/usr/bin/codecept" />
+          </configurations>
+        </settings>
+      </tool>
+    </test_tools>
+  </component>
+  <component name="PhpTestFrameworkVersionCache">
+    <tools_cache>
+      <tool tool_name="Codeception">
+        <cache>
+          <versions>
+            <info id="interpreter-55fddd85-c31f-4d59-abf1-e3d712f2378c/usr/bin/codecept" version="4.2.2" />
+          </versions>
+        </cache>
+      </tool>
+    </tools_cache>
+  </component>
+</project>

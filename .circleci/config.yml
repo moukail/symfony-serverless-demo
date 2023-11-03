@@ -1,0 +1,60 @@
+version: 2.1
+jobs:
+  build-production:
+    working_directory: ~/project
+    docker:
+      - image: cimg/php:8.2-node
+    steps:
+      - checkout
+      #- add_ssh_keys
+      - run: |
+          wget https://get.symfony.com/cli/installer -O - | bash && export PATH="$HOME/.symfony5/bin:$PATH"
+          cd web
+          sed -i "s/^DATABASE_PASSWORD=[^ ]*/DATABASE_PASSWORD=$PRODUCTION_DB_PASS/" .env.production
+          cp .env.production .env
+          
+          composer config --no-plugins allow-plugins.php-http/discovery false
+          composer install --no-interaction --no-dev --optimize-autoloader --prefer-dist --no-scripts --no-suggest
+          composer dump-env prod
+          composer dump-autoload --optimize
+
+          yarn install --silent --no-progress --non-interactive --network-timeout 1000000
+          yarn encore production
+
+      - store_test_results:
+          path: test-results
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  deploy-production:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    steps:
+      - attach_workspace:
+          at: ./build
+
+      - run: ssh-keyscan $DOMAIN_NAME >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy if tests pass and branch is master
+          command: |
+            cd ./build/project/web
+            export PATH_WEB=/var/www/$DOMAIN_NAME
+            rsync -avz --delete --rsync-path="sudo rsync" . $SSH_USER@$DOMAIN_NAME:$PATH_WEB
+            ssh $SSH_USER@$DOMAIN_NAME "cd /var/www/$DOMAIN_NAME; sudo chown nginx:nginx -R ./; chmod a+x -R ./bin/console; sudo bin/console cache:clear; sudo bin/console doctrine:migrations:migrate --no-interaction; sudo chmod a+rw -R ./var;"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-production:
+          filters:
+            branches:
+              only: master
+      - deploy-production:
+          requires:
+            - build-production
+          filters:
+            branches:
+              only: master

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CentOS 9 Firewall Configuration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for dark code block */
+        .dark-code {
+            background-color: #2d2d2d;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative; /* Added for positioning */
+        }
+
+        /* Custom CSS for the copy button */
+        .copy-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Custom CSS for the "Copied" status */
+        .status1,
+        .status2 {
+            display: inline-block;
+        }
+
+        .status2 {
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">How to Enable Port 80 in the Firewall on CentOS 9</h1>
+
+    <div class="alert alert-info">
+        <p><strong>Note:</strong> This tutorial will guide you through the process of enabling port 80 (HTTP) in the
+            firewall on CentOS 9.</p>
+    </div>
+
+    <h2>Step 1: Check if `firewalld` is Installed</h2>
+    <ul>
+        <li>Check if `firewalld` is installed on your CentOS 9 system.</li>
+        <li>If it's not installed, you can install it using `dnf`:</li>
+    </ul>
+    <pre class="dark-code">
+        <button class="btn btn-secondary copy-button" onclick="copyToClipboard('step1code')"><span class="status1">Copy</span><span class="status2">Copied</span></button>
+        <code id="step1code">
+            sudo systemctl is-enabled firewalld
+            sudo dnf install firewalld
+        </code>
+    </pre>
+
+    <h2>Step 2: Enable and Start `firewalld`</h2>
+    <ul>
+        <li>Enable and start the `firewalld` service if it's not already enabled and started:</li>
+    </ul>
+    <pre class="dark-code">
+        <button class="btn btn-secondary copy-button" onclick="copyToClipboard('step2code')"><span class="status1">Copy</span><span class="status2">Copied</span></button>
+        <code id="step2code">
+            sudo systemctl enable firewalld
+            sudo systemctl start firewalld
+        </code>
+    </pre>
+
+    <h2>Step 3: Allow Port 80 (HTTP)</h2>
+    <ul>
+        <li>Use the `firewall-cmd` command to allow incoming traffic on port 80 (HTTP).</li>
+        <li>Add port 80 to the list of allowed ports.</li>
+        <li>Make the rule persistent to survive firewall reloads or system reboots:</li>
+    </ul>
+    <pre class="dark-code">
+        <button class="btn btn-secondary copy-button" onclick="copyToClipboard('step3code')"><span class="status1">Copy</span><span class="status2">Copied</span></button>
+        <code id="step3code">
+            sudo firewall-cmd --add-port=80/tcp --permanent
+            sudo firewall-cmd --reload
+        </code>
+    </pre>
+
+    <h2>Step 4: Check the Status of the Firewall Rules</h2>
+    <ul>
+        <li>Verify that port 80 is open by listing the allowed ports:</li>
+        <li>Port 80 should be listed in the output.</li>
+    </ul>
+    <pre class="dark-code">
+        <button class="btn btn-secondary copy-button" onclick="copyToClipboard('step4code')"><span class="status1">Copy</span><span class="status2">Copied</span></button>
+        <code id="step4code">
+            sudo firewall-cmd --list-ports
+        </code>
+    </pre>
+
+    <div class="alert alert-success mt-4">
+        <p><strong>Success:</strong> Port 80 is now open in the firewall, allowing incoming HTTP traffic. If you have
+            a web server (e.g., Apache or Nginx) running on your CentOS 9 system, it should be able to accept
+            incoming HTTP requests on port 80.</p>
+    </div>
+</div>
+
+<!-- Copy to Clipboard Script -->
+<script>
+    function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId);
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        // Toggle the visibility of the "Copy" button and "Copied" status using jQuery
+        var copyButton = $('#' + elementId).siblings('.copy-button');
+        var status1 = copyButton.find('.status1');
+        var status2 = copyButton.find('.status2');
+
+        status1.hide();
+        status2.show();
+
+        // Hide "Copied" after 1.5 seconds
+        setTimeout(function () {
+            status1.show();
+            status2.hide();
+        }, 1500); // Display "Copied" for 1.5 seconds
+    }
+</script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
