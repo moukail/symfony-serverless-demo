@@ -30,13 +30,14 @@ symfony console doctrine:fixtures:load --no-interaction -vvv
 echo "-------------------------------------------------------------------"
 echo "-                        php-cs-fixer                             -"
 echo "-------------------------------------------------------------------"
-#php-cs-fixer fix ./src --rules=@Symfony --verbose --show-progress=estimating
+php-cs-fixer fix ./src --rules=@Symfony --verbose --show-progress=estimating
 
 echo "-------------------------------------------------------------------"
 echo "-                        phpstan                                  -"
 echo "-------------------------------------------------------------------"
-#vendor/bin/phpstan analyse src
-#./vendor/bin/psalm
+vendor/bin/phpstan analyse src
+./vendor/bin/psalm
+
 echo "-------------------------------------------------------------------"
 echo "-                        php-doc-check                            -"
 echo "-------------------------------------------------------------------"
@@ -45,12 +46,12 @@ echo "-------------------------------------------------------------------"
 echo "-------------------------------------------------------------------"
 echo "-                        phpcpd                                   -"
 echo "-------------------------------------------------------------------"
-#phpcpd --no-interaction src
+phpcpd --no-interaction src
 
 echo "-------------------------------------------------------------------"
 echo "-                        PHPMD                                    -"
 echo "-------------------------------------------------------------------"
-#phpmd ./src text codesize,unusedcode,naming,design,controversial,cleancode
+phpmd ./src text codesize,unusedcode,naming,design,controversial,cleancode
 
 echo "-------------------------------------------------------------------"
 echo "-                            benchmarks                           -"
@@ -83,6 +84,6 @@ echo "-------------------------------------------------------------------"
 echo "-                        yarn watch                               -"
 echo "-------------------------------------------------------------------"
 yarn install
-yarn watch
+#yarn watch
 
 tail -f /dev/null

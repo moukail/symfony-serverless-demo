@@ -13,7 +13,6 @@ echo "-                   require packages                              -"
 echo "-------------------------------------------------------------------"
 cd ./my_project
 cp .env .env.local
-cp .env .env.develop
 
 symfony composer require php:^8.2.0
 symfony composer require twig symfony/webpack-encore-bundle
