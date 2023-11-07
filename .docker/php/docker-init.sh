@@ -83,7 +83,8 @@ codecept run --steps --debug -vvv --coverage --coverage-xml --coverage-html
 echo "-------------------------------------------------------------------"
 echo "-                        yarn watch                               -"
 echo "-------------------------------------------------------------------"
+serverless plugin install -n serverless-lift
 yarn install
-#yarn watch
+yarn watch
 
 tail -f /dev/null

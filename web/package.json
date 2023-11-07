@@ -1,4 +1,29 @@
 {
-  "name": "my_project",
-  "packageManager": "yarn@4.0.1"
+  "dependencies": {
+    "chart.js": "^4.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "@popperjs/core": "^2.11.8",
+    "@symfony/webpack-encore": "^4.4.0",
+    "bootstrap": "^5.3.2",
+    "core-js": "^3.32.2",
+    "regenerator-runtime": "^0.14.0",
+    "sass": "^1.68.0",
+    "sass-loader": "^13.3.2",
+    "serverless-domain-manager": "^7.1.2",
+    "serverless-lift": "^1.28.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-notifier": "^1.15.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  }
 }

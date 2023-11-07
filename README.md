@@ -1,14 +1,3 @@
-# Setup bref
-https://bref.sh/docs/setup
-### Serverless
-```bash
-npm install -g serverless
-```
-### AWS credentials
-```bash
-serverless config credentials --provider aws --key "key" --secret "secret"
-```
-
 # Composer
 ```bash
 composer audit

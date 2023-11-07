@@ -1,7 +1,5 @@
 https://docs.aws.amazon.com/lambda/
 https://aws.amazon.com/dynamodb/
-https://www.serverless.com/
-https://bref.sh/docs/symfony/getting-started
 
 ## Free Tier
 - AWS CloudFormation: 1,000 handler operations per month per account
@@ -37,10 +35,21 @@ aws iam list-roles
 aws iam delete-role --role-name symfony-dev-ca-central-1-lambdaRole
 ```
 
+### cloudfront: list distributions 
+```bash
+aws cloudfront list-distributions
+```
+
+### cloudfront: delete distribution
+```bash
+aws cloudfront delete-distribution --id EBNNPXK60O88K
+```
+
 ### CloudFormation: list stacks 
 ```bash
 aws cloudformation list-stacks
 ```
+
 ### CloudFormation: delete stacks 
 ```bash
 aws cloudformation delete-stack --stack-name symfony-dev
@@ -62,6 +71,7 @@ aws s3 rb s3://symfony-dev-serverlessdeploymentbucket-1qm9hkkkupeul --force
 ```bash
 aws lambda list-functions
 ```
+
 ### Labmda delete a function
 ```bash
 aws lambda delete-function --function-name symfony-dev-console
@@ -89,4 +99,13 @@ aws dynamodb create-table \
 ```
 
 
+### Creating secrets
+```bash
+aws ssm put-parameter --region ca-central-1 --name '/serverless-demo/prod/app-secret' --type String --value '7ca3adc3815e12d67b4637595b7f9dff'
+```
 
+### Retrieving secrets
+```bash
+aws ssm get-parameter --region ca-central-1 --name '/serverless-demo/prod/app-secret'
+aws ssm get-parameter --region ca-central-1 --name '/serverless-demo/prod/database-url'
+```

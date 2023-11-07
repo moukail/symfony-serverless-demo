@@ -6,31 +6,39 @@ provider:
     # The AWS region in which to deploy (us-east-1 is the default)
     region: ca-central-1
     # The stage of the application, e.g. dev, production, staging… ('dev' is the default)
-    stage: dev
-    runtime: provided.al2
+    stage: prod
     environment:
         # Symfony environment variables
         APP_ENV: prod
+        # If you need to set a different value per stage:
+        APP_SECRET: ${ssm:/serverless-demo/${sls:stage}/app-secret}
+        DATABASE_URL: ${ssm:/serverless-demo/${sls:stage}/database-url}
 
 plugins:
-    - ./vendor/bref/bref
+  - ./vendor/bref/bref
+  - serverless-lift
+
+constructs:
+  frontend:
+    type: server-side-website
+    domain: serverless-demo.moukafih.nl
+    certificate: arn:aws:acm:us-east-1:090637963541:certificate/1af77330-20cd-43b4-b668-69780e29806d
+    assets:
+      '/build/*': public/build
 
 functions:
     # This function runs the Symfony website/API
-    web:
+    backend:
         handler: public/index.php
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
-        layers:
-            - ${bref:layer.php-82-fpm}
+        runtime: php-82-fpm
         events:
             - httpApi: '*'
     # This function let us run console commands in Lambda
     console:
         handler: bin/console
         timeout: 120 # in seconds
-        layers:
-            - ${bref:layer.php-82} # PHP
-            - ${bref:layer.console} # The "console" layer
+        runtime: php-82-console
 
 package:
     patterns:
