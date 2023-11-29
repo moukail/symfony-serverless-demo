@@ -3,6 +3,12 @@
   <component name="LaravelPintOptionsConfiguration">
     <option name="ruleset" value="laravel" />
   </component>
+  <component name="MessDetector">
+    <phpmd_settings>
+      <MessDetectorConfiguration tool_path="$PROJECT_DIR$/web/vendor/bin/phpmd" />
+      <phpmd_by_interpreter interpreter_id="55fddd85-c31f-4d59-abf1-e3d712f2378c" tool_path="/var/www/vendor/bin/phpmd" timeout="30000" />
+    </phpmd_settings>
+  </component>
   <component name="MessDetectorOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>
@@ -12,6 +18,17 @@
   <component name="PHPCodeSnifferOptionsConfiguration">
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpCSFixer">
+    <phpcsfixer_settings>
+      <PhpCSFixerConfiguration standards="PSR1;PSR2;Symfony;DoctrineAnnotation;PHP70Migration;PHP71Migration" tool_path="$PROJECT_DIR$/web/vendor/bin/php-cs-fixer" />
+      <phpcs_fixer_by_interpreter interpreter_id="55fddd85-c31f-4d59-abf1-e3d712f2378c" standards="PSR1;PSR2;Symfony;DoctrineAnnotation;PHP70Migration;PHP71Migration" tool_path="/var/www/vendor/bin/php-cs-fixer" timeout="30000" />
+    </phpcsfixer_settings>
+  </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <PhpCSConfiguration beautifier_path="$PROJECT_DIR$/web/vendor/bin/phpcbf" tool_path="$PROJECT_DIR$/web/vendor/bin/phpcs" />
+    </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
@@ -33,9 +50,7 @@
       <path value="$PROJECT_DIR$/web/vendor/doctrine/sql-formatter" />
       <path value="$PROJECT_DIR$/web/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/debug-bundle" />
-      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/web/vendor/symfony/monolog-bundle" />
@@ -133,12 +148,8 @@
       <path value="$PROJECT_DIR$/web/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/web/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/web/vendor/behat/gherkin" />
-      <path value="$PROJECT_DIR$/web/vendor/brick/math" />
       <path value="$PROJECT_DIR$/web/vendor/league/factory-muffin" />
       <path value="$PROJECT_DIR$/web/vendor/league/factory-muffin-faker" />
-      <path value="$PROJECT_DIR$/web/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/web/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/web/vendor/ramsey/uuid-doctrine" />
       <path value="$PROJECT_DIR$/web/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/web/vendor/nyholm/psr7" />
       <path value="$PROJECT_DIR$/web/vendor/phar-io/version" />
@@ -152,6 +163,65 @@
       <path value="$PROJECT_DIR$/web/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/web/vendor/bref/bref" />
       <path value="$PROJECT_DIR$/web/vendor/bref/symfony-bridge" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/web/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/web/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/web/vendor/pdepend/pdepend" />
+      <path value="$PROJECT_DIR$/web/vendor/phpmd/phpmd" />
+      <path value="$PROJECT_DIR$/web/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/web/vendor/phpstan/phpstan-doctrine" />
+      <path value="$PROJECT_DIR$/web/vendor/phpstan/extension-installer" />
+      <path value="$PROJECT_DIR$/web/vendor/netresearch/jsonmapper" />
+      <path value="$PROJECT_DIR$/web/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/web/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/web/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/web/vendor/amphp/amp" />
+      <path value="$PROJECT_DIR$/web/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/web/vendor/amphp/byte-stream" />
+      <path value="$PROJECT_DIR$/web/vendor/spatie/array-to-xml" />
+      <path value="$PROJECT_DIR$/web/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/web/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/web/vendor/felixfbecker/language-server-protocol" />
+      <path value="$PROJECT_DIR$/web/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/web/vendor/felixfbecker/advanced-json-rpc" />
+      <path value="$PROJECT_DIR$/web/vendor/vimeo/psalm" />
+      <path value="$PROJECT_DIR$/web/vendor/psalm/plugin-symfony" />
+      <path value="$PROJECT_DIR$/web/vendor/phpmetrics/phpmetrics" />
+      <path value="$PROJECT_DIR$/web/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/web/vendor/nunomaduro/phpinsights" />
+      <path value="$PROJECT_DIR$/web/vendor/league/container" />
+      <path value="$PROJECT_DIR$/web/vendor/dealerdirect/phpcodesniffer-composer-installer" />
+      <path value="$PROJECT_DIR$/web/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/web/vendor/slevomat/coding-standard" />
+      <path value="$PROJECT_DIR$/web/vendor/php-parallel-lint/php-parallel-lint" />
+      <path value="$PROJECT_DIR$/web/vendor/cmgmyr/phploc" />
+      <path value="$PROJECT_DIR$/web/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/web/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/web/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/web/vendor/league/flysystem-aws-s3-v3" />
+      <path value="$PROJECT_DIR$/web/vendor/mtdowling/jmespath.php" />
+      <path value="$PROJECT_DIR$/web/vendor/aws/aws-crt-php" />
+      <path value="$PROJECT_DIR$/web/vendor/aws/aws-sdk-php" />
+      <path value="$PROJECT_DIR$/web/vendor/league/flysystem-bundle" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/web/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/web/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/web/vendor/liip/imagine-bundle" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -225,8 +295,25 @@
     </phpInfoCache>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/web/vendor/bin/phpstan" />
+      <phpstan_by_interpreter interpreter_id="55fddd85-c31f-4d59-abf1-e3d712f2378c" tool_path="/var/www/vendor/bin/phpstan" timeout="60000" />
+    </PhpStan_settings>
+  </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/web/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/web/vendor/autoload.php" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
+  <component name="Psalm">
+    <Psalm_settings>
+      <PsalmConfiguration tool_path="$PROJECT_DIR$/web/vendor/bin/psalm" />
+      <psalm_fixer_by_interpreter interpreter_id="55fddd85-c31f-4d59-abf1-e3d712f2378c" tool_path="/var/www/vendor/bin/psalm" timeout="60000" />
+    </Psalm_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
     <option name="transferred" value="true" />

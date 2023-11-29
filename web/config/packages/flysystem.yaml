@@ -1,0 +1,31 @@
+# Read the documentation at https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md
+services:
+    aws_client_service:
+        class: Aws\S3\S3Client
+        factory: [Aws\S3\S3Client, 'factory']
+        arguments:
+            -
+                version: '%env(AWS_S3_VERSION)%'
+                region: '%env(AWS_S3_REGION)%'
+                credentials:
+                    key: '%env(AWS_ACCESS_ID)%'
+                    secret: '%env(AWS_ACCESS_SECRET)%'
+
+flysystem:
+    storages:
+        uploads.local.storage:
+            adapter: 'local'
+            options:
+                directory: '%kernel.project_dir%/var/storage/uploads'
+
+        uploads.aws.storage:
+          adapter: 'aws'
+          options:
+            client: 'aws_client_service' # The service ID of the Aws\S3\S3Client instance
+            bucket: "%env(AWS_S3_BUCKET_NAME)%"
+            #prefix: '%env(S3_STORAGE_PREFIX)%'
+
+        uploads.storage.lazy:
+          adapter: 'lazy'
+          options:
+            source: '%env(APP_UPLOADS_SOURCE)%'

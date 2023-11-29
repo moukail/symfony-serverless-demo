@@ -120,6 +120,7 @@ symfony console doctrine:migrations:migrate --allow-no-migration --no-interactio
 symfony console doctrine:schema:update --force
 symfony console doctrine:schema:validate
 symfony console doctrine:fixtures:load --no-interaction
+symfony console dbal:run-sql 'SELECT * FROM product'
 ```
 
 # Nodejs

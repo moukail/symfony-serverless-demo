@@ -3,8 +3,9 @@ FROM php:8.2-fpm-alpine3.18
 
 ENV TIMEZONE 'Europe/Amsterdam'
 
-RUN apk --update --no-cache add bash wget gcc g++ make autoconf linux-headers openssh git rsync
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN apk --update --no-cache add bash wget gcc g++ make autoconf linux-headers openssh git rsync libpng-dev libjpeg-turbo-dev
+RUN docker-php-ext-configure gd --with-jpeg
+RUN docker-php-ext-install -j$(nproc) gd pdo_mysql
 RUN docker-php-ext-enable opcache
 
 # ext-intl
@@ -41,6 +42,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 
 # Symfony CLI
 RUN wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony5/bin/symfony /usr/bin/symfony
+
+# PHP Copy/Paste Detector
+RUN wget https://phar.phpunit.de/phpcpd.phar -O /usr/bin/phpcpd && chmod a+x /usr/bin/phpcpd
 
 ### Codeception
 RUN wget http://codeception.com/codecept.phar -O /usr/bin/codecept && chmod a+x /usr/bin/codecept

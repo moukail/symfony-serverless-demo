@@ -1,10 +1,12 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '15'
+        server_version: '8.2'
+        mapping_types:
+          enum: string
+
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -24,6 +26,11 @@ when@test:
 
 when@prod:
     doctrine:
+        dbal:
+            options:
+                # Connect to the database via SSL
+                !php/const PDO::MYSQL_ATTR_SSL_CA: /opt/bref/ssl/cert.pem
+
         orm:
             auto_generate_proxy_classes: false
             proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
