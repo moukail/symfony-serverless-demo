@@ -37,7 +37,7 @@ class AlbumType extends AbstractType
                             'image/jpeg',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image',
-                    ])
+                    ]),
                 ],
             ])
         ;

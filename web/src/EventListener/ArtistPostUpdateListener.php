@@ -12,6 +12,5 @@ class ArtistPostUpdateListener
 {
     public function __invoke(Artist $artist, PostUpdateEventArgs $event): void
     {
-
     }
 }

@@ -37,12 +37,12 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedPicture = $form->get('profile_picture')->getData();;
+            $uploadedPicture = $form->get('profile_picture')->getData();
 
-            if($uploadedPicture){
+            if ($uploadedPicture) {
                 $directory = 'artist_pictures';
                 $picturePath = $uploaderService->uploadFile($uploadedPicture, $directory, true);
-                $artist->setPicture($directory . '/' . $picturePath);
+                $artist->setPicture($directory.'/'.$picturePath);
             }
 
             $entityManager->persist($artist);
@@ -52,11 +52,7 @@ class ArtistController extends AbstractController
                 unlink($uploadedPicture->getPathname());
             }
 
-            $nextAction = $form->get('saveAndAdd')->isClicked()
-                ? 'app_artist_new'
-                : 'app_artist_index';
-
-            return $this->redirectToRoute($nextAction, [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('artist/new.html.twig', [
@@ -102,7 +98,7 @@ class ArtistController extends AbstractController
             $entityManager->remove($artist);
             $entityManager->flush();
 
-            if($artist->getPicture()){
+            if ($artist->getPicture()) {
                 $uploaderService->deleteFile($artist->getPicture());
             }
         }

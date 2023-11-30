@@ -12,7 +12,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 readonly class UploaderService
 {
     public function __construct(private FilesystemOperator $uploadsStorageLazy, private SluggerInterface $slugger)
-    {}
+    {
+    }
 
     /**
      * @throws FilesystemException
@@ -37,13 +38,14 @@ readonly class UploaderService
             $directory.'/'.$newFilename,
             $stream,
             [
-                'visibility' => $isPublic ? Visibility::PUBLIC : Visibility::PRIVATE
+                'visibility' => $isPublic ? Visibility::PUBLIC : Visibility::PRIVATE,
             ]
         );
 
         if (is_resource($stream)) {
             fclose($stream);
         }
+
         return $newFilename;
     }
 

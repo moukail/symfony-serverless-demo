@@ -47,9 +47,9 @@ class ArtistType extends AbstractType
                             'image/jpeg',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image',
-                    ])
+                    ]),
                 ],
-                //'image_property' => 'picture'
+                // 'image_property' => 'picture'
             ])
             ->add('albums', CollectionType::class, [
                 'entry_type' => AlbumType::class,
@@ -60,7 +60,6 @@ class ArtistType extends AbstractType
                 'prototype' => true,
             ])
             ->add('save', SubmitType::class, ['label' => 'Create Artist'])
-            ->add('saveAndAdd', SubmitType::class, ['label' => 'Save and Add'])
         ;
     }
 

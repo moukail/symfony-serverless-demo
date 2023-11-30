@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AlbumRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +16,7 @@ class Album
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?Uuid $id;
 
     #[Assert\Type(type: Artist::class)]
@@ -27,10 +28,8 @@ class Album
     public function __construct(
         #[ORM\Column(length: 255)]
         public readonly ?string $title,
-
         #[ORM\Column(length: 255)]
         public readonly ?string $picture,
-
         #[ORM\Column(type: Types::TEXT)]
         public readonly ?string $description
     ) {
