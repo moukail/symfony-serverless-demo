@@ -20,6 +20,9 @@ jobs:
     defaults:
       run:
         working-directory: ./web/
+    env:
+      APP_SECRET: e5451c87915bfd9c0f8c28c0e62150bb
+      DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
     steps:
     #################################
     #    Stage 2 - Build            #
@@ -37,10 +40,6 @@ jobs:
         #extensions: mbstring, intl
         #coverage: xdebug
         tools: symfony, codeception
-      env:
-        APP_SECRET: e5451c87915bfd9c0f8c28c0e62150bb
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
-        #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
