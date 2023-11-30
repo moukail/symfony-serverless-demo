@@ -52,6 +52,8 @@ jobs:
           ${{ runner.os }}-php-
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: yarn install
+      run: yarn install
     - name: yarn build
       run: yarn build
     #################################
