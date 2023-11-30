@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./web
+        working-directory: ./web/
     steps:
     #################################
     #    Stage 2 - Build            #
@@ -29,6 +29,7 @@ jobs:
       with:
         node-version: 18
         cache: 'yarn'
+        cache-dependency-path: ./web/yarn.lock
 
     - uses: shivammathur/setup-php@v2
       with:
