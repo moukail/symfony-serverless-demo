@@ -22,3 +22,22 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    cloudwatch_client:
+        class: Aws\CloudWatchLogs\CloudWatchLogsClient
+        arguments:
+            -
+                credentials: {
+                    key: "%env(resolve:AWS_ACCESS_KEY_ID)%",
+                    secret: "%env(resolve:AWS_SECRET_ACCESS_KEY)%"
+                }
+                region: "ca-central-1"
+                version: "latest"
+
+    cloudwatch_handler:
+        class: App\Logger\Handler\CloudWatchLogsHandler
+        arguments:
+            - '@cloudwatch_client'
+            - group: company-website
+              stream: frontend-api
+              # more parameters, see Configuration

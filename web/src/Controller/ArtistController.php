@@ -52,6 +52,11 @@ class ArtistController extends AbstractController
                 unlink($uploadedPicture->getPathname());
             }
 
+            $this->addFlash(
+                'success',
+                '<strong>Success!</strong> Artist is added.'
+            );
+
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Artist{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="mt-5">Edit Artist</h2>
+        <a href="{{ path('app_artist_index') }}">back to list</a>
+
+        {#{{ include('artist/_form.html.twig') }}#}
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.profile_picture) }}
+        <div class="col-sm-3">
+            {% if form.vars.data.picture|default %}
+                <img src="{{ path('liip_imagine_filter', {filter: 'my_thumb', path: artist.picture}) }}" height="100" alt="picture"/>
+            {% endif %}
+        </div>
+        {# the data-index attribute is required for the JavaScript code below #}
+        <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="albums">Add</button>
+
+        <div class="albums accordion accordion-flush" id="accordionFlushExample"
+             data-index="{{ form.albums|length > 0 ? form.albums|last.vars.name + 1 : 0 }}"
+             data-prototype="{{ form_widget(form.albums.vars.prototype)|e('html_attr') }}"
+        >
+            {% for album in form.albums %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading{{ album.vars.name }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ album.vars.name }}" aria-expanded="false" aria-controls="flush-collapse{{ album.vars.name }}">
+                            Accordion Item #{{ loop.index }}
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{ album.vars.name }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ album.vars.name }}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            {{ form_row(album.title) }}
+                            {{ form_row(album.description) }}
+                            {{ form_row(album.album_cover) }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </div>
+
+{#    {{ include('artist/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_artist_index') }}">back to list</a>
+
+    {{ include('artist/_delete_form.html.twig') }}#}
+{% endblock %}

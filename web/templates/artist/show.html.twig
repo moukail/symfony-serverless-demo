@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artist{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-5">Artist</h2>
+
+        <img src="{{ path('liip_imagine_filter', {filter: 'my_thumb', path: artist.picture}) }}" alt="picture"/>
+        
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ artist.name }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_artist_index') }}">back to list</a>
+
+        <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">edit</a>
+
+        {{ include('artist/_delete_form.html.twig') }}
+    </div>
+
+
+{% endblock %}

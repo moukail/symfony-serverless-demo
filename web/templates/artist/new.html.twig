@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Artist{% endblock %}
+
+{% form_theme form 'form/artist_theme.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-5">Create new Artist</h2>
+        <a href="{{ path('app_artist_index') }}">back to list</a>
+
+        {#{{ include('artist/_form.html.twig') }}#}
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.profile_picture) }}
+            {{ form_row(form.albums) }}
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('div');
+            item.className = "accordion-item"
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+
+            collectionHolder.dataset.index++;
+        };
+
+        const addTagFormDeleteLink = (item) => {
+            const removeFormButton = document.createElement('button');
+            removeFormButton.innerText = 'Delete this tag';
+
+            item.append(removeFormButton);
+
+            removeFormButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                // remove the li for the tag form
+                item.remove();
+            });
+        }
+
+        document
+            .querySelectorAll('.add_item_link')
+            .forEach(btn => {
+                btn.addEventListener("click", addFormToCollection)
+            });
+
+        document
+            .querySelectorAll('div.albums div')
+            .forEach((tag) => {
+                addTagFormDeleteLink(tag)
+            });
+
+    </script>
+{% endblock %}
