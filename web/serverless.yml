@@ -9,7 +9,7 @@ provider:
     stage: prod
     environment:
         # Symfony environment variables
-        APP_ENV: dev
+        APP_ENV: prod
         APP_DEBUG: 1
         # If you need to set a different value per stage:
         APP_SECRET: ${ssm:/serverless-demo/${sls:stage}/app-secret}
