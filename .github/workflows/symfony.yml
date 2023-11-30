@@ -69,6 +69,7 @@ jobs:
 
     - name: Unit tests
       env:
+        APP_SECRET: e5451c87915bfd9c0f8c28c0e62150bb
         DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
       run: codecept run Unit
     #- name: Functional tests
@@ -84,3 +85,10 @@ jobs:
     #################################
     - name: Remove Dev Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
+    - name: Deploy to AWS Lambda
+      uses: serverless/github-action@v3
+      with:
+        args: deploy --stage=prod
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
