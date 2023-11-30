@@ -82,14 +82,14 @@ Next steps:
 
 #### 3. Create suite
 ```bash
-codecept generate:suite api
+codecept generate:suite Api
 ```
 
 #### 4. Create Test
 ```bash
-codecept generate:cest unit User
-codecept generate:cest api User
-codecept generate:cest acceptance Login
+codecept generate:test Unit User
+codecept generate:cest Api User
+codecept generate:cest Acceptance Login
 ```
 
 ###

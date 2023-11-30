@@ -6,4 +6,13 @@ actor: UnitTester
 modules:
     enabled:
         - Asserts
+        - Symfony:
+              app_path: 'src'
+              environment: 'test'
+        - Doctrine2:
+              depends: Symfony
+              cleanup: true
+        - DataFactory:
+              depends: Doctrine2
+        - \App\Tests\Support\Helper\Factories
 step_decorators: ~
