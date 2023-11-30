@@ -24,8 +24,11 @@ jobs:
     #################################
     #    Stage 2 - Build            #
     #################################
-    #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
-    # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
@@ -34,7 +37,7 @@ jobs:
         tools: symfony, codeception
       #env:
         #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/checkout@v4
+
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
     - name: Cache Composer packages
@@ -47,7 +50,8 @@ jobs:
           ${{ runner.os }}-php-
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
+    - name: NPM build
+      run: npm run build
     #################################
     #    Stage 2 - Code Analysis    #
     #################################
