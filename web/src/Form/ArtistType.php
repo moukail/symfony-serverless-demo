@@ -20,16 +20,14 @@ class ArtistType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Name',
-                'attr' => [
-                    'placeholder' => 'Name',
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
+                'attr' => ['placeholder' => 'Name',],
+                'row_attr' => ['class' => 'mb-3 row',],
+                'label_attr' => ['class' => 'col-sm-2 col-form-label'],
             ])
             ->add('profile_picture', FileType::class, [
                 'label' => 'Picture',
-
+                'row_attr' => ['class' => 'mb-3 row',],
+                'label_attr' => ['class' => 'col-sm-2 col-form-label'],
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 
@@ -53,7 +51,8 @@ class ArtistType extends AbstractType
             ])
             ->add('albums', CollectionType::class, [
                 'entry_type' => AlbumType::class,
-                'entry_options' => ['label' => false],
+                'label' => 'Albums',
+                //'entry_options' => ['label' => false],
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true,

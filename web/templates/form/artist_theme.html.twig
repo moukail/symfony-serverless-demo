@@ -1,13 +1,32 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
+{% block _artist_albums_label %}
+    <legend>
+        <h5 class="mt-5 d-inline p-2">{{ label }}</h5>
+        <button type="button" class="d-inline p-2 float-end btn btn-primary add_item_link" data-collection-holder-class="albums">Add</button>
+    </legend>
+{% endblock %}
+
+{% block _artist_albums_widget %}
+    <div class="albums accordion" id="accordionExample"
+         data-index="{{ form|length > 0 ? form|last.vars.name + 1 : 0 }}"
+         data-prototype="{{ form_row(form.vars.prototype)|e('html_attr') }}"
+    ></div>
+{% endblock %}
+
+{% block form_widget %}
+    <div class="col-sm-6">{{ parent() }}</div>
+{% endblock %}
+
 {% block album_row %}
-    <h2 class="accordion-header" id="flush-heading{{ form.vars.name }}">
-        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ form.vars.name }}" aria-expanded="false" aria-controls="flush-collapse{{ form.vars.name }}">
-            Accordion Item
+    <h2 class="accordion-header">
+        <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse{{ form.vars.name }}" aria-expanded="true" aria-controls="collapse{{ form.vars.name }}">
+            Accordion Item #{{ form.vars.name }}
         </button>
     </h2>
-    <div id="flush-collapse{{ form.vars.name }}" class="accordion-collapse collapse show" aria-labelledby="flush-heading{{ form.vars.name }}" data-bs-parent="#accordionFlushExample">
+    <div id="collapse{{ form.vars.name }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
         <div class="accordion-body">
+            <button type="button" class="float-end btn btn-danger delete_item_link" data-collection-holder-class="albums"><i class="bi bi-trash3"></i></button>
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
             {{ form_row(form.album_cover) }}
@@ -15,16 +34,9 @@
     </div>
 {% endblock %}
 
-{% block _artist_albums_widget %}
-    <div>
-        <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="albums">Add</button>
-    </div>
-    <div class="albums accordion accordion-flush" id="accordionFlushExample"
-         data-index="{{ form|length > 0 ? form|last.vars.name + 1 : 0 }}"
-         data-prototype="{{ form_row(form.vars.prototype)|e('html_attr') }}"
-    ></div>
 
-{% endblock %}
+
+
 
 {% block file_widget %}
     {{ block('form_widget') }}
@@ -32,5 +44,4 @@
         <img src="{{ asset(image_url) }}"/>
     {% endif %}
 {% endblock %}
-{% block artist_albums %}<div><p>test1__</p></div>{% endblock %}
 

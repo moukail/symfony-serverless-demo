@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
@@ -37,20 +38,35 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedPicture = $form->get('profile_picture')->getData();
+            $uploadedArtistPicture = $form->get('profile_picture')->getData();
 
-            if ($uploadedPicture) {
-                $directory = 'artist_pictures';
-                $picturePath = $uploaderService->uploadFile($uploadedPicture, $directory, true);
-                $artist->setPicture($directory.'/'.$picturePath);
+            if ($uploadedArtistPicture) {
+                $artist_directory = 'artist_pictures';
+                $artist_picture_path = $uploaderService->uploadFile($uploadedArtistPicture, $artist_directory, true);
+                $artist->setPicture($artist_directory.'/'.$artist_picture_path);
+            }
+
+            if ($uploadedArtistPicture && is_file($uploadedArtistPicture->getPathname())) {
+                unlink($uploadedArtistPicture->getPathname());
+            }
+
+            $albumsCollection = $form->get('albums');
+
+            foreach ($albumsCollection as $albumForm){
+                $uploadedAlbumCover = $albumForm->get('album_cover')->getData();
+
+                $album_directory = 'album_pictures';
+                $album_picture_path = $uploaderService->uploadFile($uploadedAlbumCover, $album_directory, true);
+
+                if ($uploadedAlbumCover && is_file($uploadedAlbumCover->getPathname())) {
+                    unlink($uploadedAlbumCover->getPathname());
+                }
+
+                $albumForm->getData()->setPicture($album_directory.'/'.$album_picture_path);
             }
 
             $entityManager->persist($artist);
             $entityManager->flush();
-
-            if ($uploadedPicture && is_file($uploadedPicture->getPathname())) {
-                unlink($uploadedPicture->getPathname());
-            }
 
             $this->addFlash(
                 'success',

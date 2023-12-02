@@ -3301,6 +3301,11 @@ boolbase@^1.0.0:
   resolved "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
 
+bootstrap-icons@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.11.2.tgz#e1c75daec154e25958db04c4eb3cbda6041e7118"
+  integrity sha512-TgdiPv+IM9tgDb+dsxrnGIyocsk85d2M7T0qIgkvPedZeoZfyeG/j+yiAE4uHCEayKef2RP05ahQ0/e9Sv75Wg==
+
 bootstrap@^5.3.2:
   version "5.3.2"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.2.tgz"

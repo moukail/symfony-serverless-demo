@@ -28,8 +28,8 @@ class Album
     public function __construct(
         #[ORM\Column(length: 255)]
         public readonly ?string $title,
-        #[ORM\Column(length: 255)]
-        public readonly ?string $picture,
+        #[ORM\Column(length: 255, nullable: true)]
+        private ?string $picture,
         #[ORM\Column(type: Types::TEXT)]
         public readonly ?string $description
     ) {
@@ -38,6 +38,16 @@ class Album
     public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): void
+    {
+        $this->picture = $picture;
     }
 
     public function getArtist(): ?Artist

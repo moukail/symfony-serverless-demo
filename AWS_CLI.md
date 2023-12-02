@@ -109,3 +109,17 @@ aws ssm put-parameter --region ca-central-1 --name '/serverless-demo/prod/app-se
 aws ssm get-parameter --region ca-central-1 --name '/serverless-demo/prod/app-secret'
 aws ssm get-parameter --region ca-central-1 --name '/serverless-demo/prod/database-url'
 ```
+
+### CloudWatch Logs
+######
+```bash
+aws logs create-log-group --log-group-name my-logs
+```
+######
+```bash
+aws logs create-log-stream --log-group-name my-logs --log-stream-name 20150601
+```
+######
+```bash
+aws logs put-log-events --log-group-name my-logs --log-stream-name 20150601 --log-events timestamp=$(date +"%s"),message=helloXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXZZ --debug
+```

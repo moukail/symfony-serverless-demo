@@ -37,7 +37,7 @@ services:
     cloudwatch_handler:
         class: App\Logger\Handler\CloudWatchLogsHandler
         arguments:
-            - client: '@cloudwatch_client'
-            - group: company-website
-            - stream: frontend-api
+            - '@cloudwatch_client'
+            - company-website
+            - frontend-api
               # more parameters, see Configuration

@@ -57,7 +57,6 @@ COPY --from=node /opt /opt
 RUN addgroup _www && adduser -S -H --ingroup _www _www
 
 RUN echo | npm install -g npm
-RUN npm install -g serverless
 
 WORKDIR /var/www
 

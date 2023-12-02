@@ -6,9 +6,8 @@
 
 {% block body %}
     <div class="container">
-        <h2 class="mt-5">Create new Artist</h2>
-        <a href="{{ path('app_artist_index') }}">back to list</a>
-
+        <h2 class="mt-5 d-inline p-2">Create new Artist</h2>
+        <a class="d-inline p-2 float-end" href="{{ path('app_artist_index') }}">back to list</a>
         {#{{ include('artist/_form.html.twig') }}#}
         {{ form_start(form) }}
             {{ form_row(form.name) }}
@@ -33,34 +32,23 @@
                     collectionHolder.dataset.index
                 );
 
-            collectionHolder.appendChild(item);
+            item
+                .querySelectorAll('.delete_item_link')
+                .forEach(btn => {
+                    btn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        item.remove();
+                    })
+                });
 
+            collectionHolder.appendChild(item);
             collectionHolder.dataset.index++;
         };
-
-        const addTagFormDeleteLink = (item) => {
-            const removeFormButton = document.createElement('button');
-            removeFormButton.innerText = 'Delete this tag';
-
-            item.append(removeFormButton);
-
-            removeFormButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                // remove the li for the tag form
-                item.remove();
-            });
-        }
 
         document
             .querySelectorAll('.add_item_link')
             .forEach(btn => {
                 btn.addEventListener("click", addFormToCollection)
-            });
-
-        document
-            .querySelectorAll('div.albums div')
-            .forEach((tag) => {
-                addTagFormDeleteLink(tag)
             });
 
     </script>
