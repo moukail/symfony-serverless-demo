@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
@@ -52,7 +51,7 @@ class ArtistController extends AbstractController
 
             $albumsCollection = $form->get('albums');
 
-            foreach ($albumsCollection as $albumForm){
+            foreach ($albumsCollection as $albumForm) {
                 $uploadedAlbumCover = $albumForm->get('album_cover')->getData();
 
                 $album_directory = 'album_pictures';
