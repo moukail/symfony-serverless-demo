@@ -21,13 +21,13 @@ class ArtistType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name',
                 'attr' => ['placeholder' => 'Name'],
-                'row_attr' => ['class' => 'mb-3 row'],
-                'label_attr' => ['class' => 'col-sm-2 col-form-label'],
+                'row_attr' => ['class' => 'col-sm-6'],
+                //'label_attr' => ['class' => 'col-sm-2 col-form-label'],
             ])
             ->add('profile_picture', FileType::class, [
                 'label' => 'Picture',
-                'row_attr' => ['class' => 'mb-3 row'],
-                'label_attr' => ['class' => 'col-sm-2 col-form-label'],
+                'row_attr' => ['class' => 'col-sm-6'],
+                //'label_attr' => ['class' => 'col-sm-2 col-form-label'],
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 

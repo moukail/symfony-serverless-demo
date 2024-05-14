@@ -6,15 +6,22 @@
 
 {% block body %}
     <div class="container">
-        <h2 class="mt-5 d-inline p-2">Create new Artist</h2>
+        <h4 class="mt-5 d-inline p-2">Create new Artist</h4>
         <a class="d-inline p-2 float-end" href="{{ path('app_artist_index') }}">back to list</a>
-        {#{{ include('artist/_form.html.twig') }}#}
-        {{ form_start(form) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.profile_picture) }}
-            {{ form_row(form.albums) }}
-        {{ form_end(form) }}
-    </div>
+
+            {#{{ include('artist/_form.html.twig') }}#}
+            {{ form_start(form) }}
+            <div class="row g-5">
+                {{ form_row(form.name) }}
+                {{ form_row(form.profile_picture) }}
+                {{ form_row(form.albums) }}
+
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+
 
     <script>
 
